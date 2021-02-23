@@ -62,7 +62,11 @@ namespace serviceWrapper
 
         protected override void OnStop()
         {
-            Process.GetProcessById(int.Parse(File.ReadAllText(pidFile))).Kill();
+            var p = Process.GetProcessById(int.Parse(File.ReadAllText(pidFile)));
+            if (p != null)
+            {
+                p.Kill();
+            }
         }
 
         static Process callExe(string exepath, string para)
